@@ -13,8 +13,8 @@ use interpreter::{
 fn main() {
     let data = {
         let stdin = io::stdin();
-        let mut stdin_handle = stdin.lock();
-        let mut handle = BufReader::new(&mut stdin_handle);
+        let stdin_handle = stdin.lock();
+        let mut handle = BufReader::new(stdin_handle);
 
         let mut data = Vec::new();
         handle.read_to_end(&mut data)
@@ -23,7 +23,7 @@ fn main() {
         data
     };
 
-    let mut disp = TerminalDisplay::new();
+    let disp = TerminalDisplay::new();
     let mut ctx = Context::new(disp, (), ());
     let mut vm = VM::new();
 
