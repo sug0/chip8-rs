@@ -50,6 +50,7 @@ impl Display for TerminalDisplay {
 
         for y in 0..DISPLAY_HEIGHT {
             self.buf.clear();
+            self.buf.push_str(termion::color::LightGreen.fg_str());
             for x in 0..DISPLAY_WIDTH {
                 if self.scr[y*DISPLAY_WIDTH + x] == 0 {
                     self.buf.push(' ')
@@ -57,6 +58,7 @@ impl Display for TerminalDisplay {
                     self.buf.push('█')
                 }
             }
+            self.buf.push_str(termion::color::Reset.fg_str());
             println!("{}{}", termion::cursor::Goto(0, y as u16), &self.buf)
         }
 
